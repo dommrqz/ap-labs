@@ -9,10 +9,10 @@ import (
 	"os"
 )
 
-func handleConn(c net.Conn, city string) {
+func handleConn(c net.Conn, tz string) {
 	defer c.Close()
 	for {
-		_, err := io.WriteString(c, city + ": " + time.Now().Format("15:04:05\n"))
+		_, err := io.WriteString(c, tz + ": " + time.Now().Format("15:04:05\n"))
 		if err != nil {
 			return // e.g., client disconnected
 		}
