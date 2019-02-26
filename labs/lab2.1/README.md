@@ -2,7 +2,7 @@
 ## Jorge Dominic Márquez Muñoz, A00569034
 
 ### ClockWall: a client program that listens to the hours of three different timezones at once.
-### Compiling nstructions:
+### Compiling instructions:
 	1. go build clock2.go
 	2. go build clockWall.go
 ### Testing code:
