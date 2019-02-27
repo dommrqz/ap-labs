@@ -86,7 +86,7 @@ void getWordLines(char * buffer){
             if(isNoisyWord(temp) == 0 && tempCount > 2){
 				wordIndex = isAdded(temp, wordCount);
 				if(wordIndex == -1){
-					//printf(" ");
+					printf(" ");
 					strcpy(words[wordCount].word, temp);
 					addLine(wordCount, line);
 					wordCount++;
