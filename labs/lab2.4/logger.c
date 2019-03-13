@@ -27,6 +27,9 @@ int initLogger(char *logType){
         type = 1;
     } else if (strcmp(logType, "syslog") == 0){
         type = 2;
+    } else if (strlen(logType) == 0){
+        logType = "stdout";
+        type = 1;
     }
     printf("Initializing logger on %s\n", logType);
     return 0;
