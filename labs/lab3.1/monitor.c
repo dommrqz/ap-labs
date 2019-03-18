@@ -17,7 +17,7 @@ int fd;
 
 static int addWatchers(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf){
     if((intmax_t) sb->st_size == 4096){
-        wd = inotify_add_watch(fd, fpath, IN_MODIFY | IN_CREATE | IN_DELETE);
+        wd = inotify_add_watch(fd, fpath, IN_MODIFY | IN_CREATE | IN_DELETE | IN_MOVED_FROM | IN_MOVED_TO);
     }
     return 0;           /* To tell nftw() to continue */
 }
@@ -79,6 +79,16 @@ int main(int argc, char **argv) {
                     }
                 } else if (event->mask & IN_MODIFY) { //directory changes?
                     infof("The file %s was modified.\n", event->name);
+                } else if (event->mask & IN_MOVED_FROM){
+                    if(event->mask == 64){
+                        infof("The file %s was renamed ", event->name);
+                    } else if (event->mask == 1073741888){
+                        infof("The directory %s was renamed ", event->name);
+                        getTree(argv[1]);
+                    }
+                }
+                if (event->mask & IN_MOVED_TO){
+                    infof("to %s.\n", event->name);
                 }
             }
             i += EVENT_SIZE + event->len;
