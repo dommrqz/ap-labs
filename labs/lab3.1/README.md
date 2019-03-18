@@ -1,7 +1,7 @@
 # Lab 3.1
 ## Jorge Dominic Márquez Muñoz, A00569034
 
-### File event monitorin within a directory (passed as an arg) and all its subdirectories.
+### File/directory event monitoring within a directory (passed as an arg) and all its subdirectories.
 ### Compilation instructions:
 
 #### This lab includes a Makefile, so can be compiled and cleaned by
