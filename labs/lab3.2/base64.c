@@ -9,7 +9,7 @@ char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 float progress;
 
-static void sigHandler(int sig) {
+static void showProgress(int sig) {
     infof("Progress: %.0f%c\n", progress, 37);
 }
 
@@ -34,10 +34,10 @@ void b64_decode(char *b64src, char *clrdst) {
 
     progress = ((float)i/(float)strlen(b64src))*100;
 
-    if (signal(SIGINT, sigHandler) == SIG_ERR)
+    if (signal(SIGINT, showProgress) == SIG_ERR)
         exit("signal");
 
-    if (signal(SIGPWR, sigHandler) == SIG_ERR)
+    if (signal(SIGPWR, showProgress) == SIG_ERR)
         exit("signal");
 
     c = (int) b64src[i];
@@ -79,11 +79,11 @@ void b64_encode(char *clrstr, char *b64dst) {
 
     progress = ((float)j/(float)strlen(clrstr))*100;
 
-    if (signal(SIGINT, sigHandler) == SIG_ERR){
+    if (signal(SIGINT, showProgress) == SIG_ERR){
         exit("Error in signal");
     }
 
-    if (signal(SIGPWR, sigHandler) == SIG_ERR)
+    if (signal(SIGPWR, showProgress) == SIG_ERR)
         exit("signal");
 
     len = 0;
