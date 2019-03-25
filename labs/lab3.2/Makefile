@@ -7,3 +7,5 @@ clean:
 	rm logger.o
 	rm base.o
 	rm base64.o
+	rm encoded.txt
+	rm decoded.txt
