@@ -3,11 +3,26 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <signal.h>
 
-/* ---- Base64 Encoding/Decoding Table --- */
+#include "logger.h"
+
 char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-/* decodeblock - decode 4 '6-bit' characters into 3 8-bit binary bytes */
+float progress;
+
+//struct sigaction sa;
+
+static void sigHandler(int sig) {
+    infof("Progress: %.0f%c\n", progress, 37);
+}
+
+/*
+static void sigHandler2(int sig, siginfo_t *si, void *uc) {
+    infof("Progress: %.0f%c\n", progress, 37);
+}
+*/
+
 void decodeblock(unsigned char in[], char *clrstr) {
   unsigned char out[4];
   out[0] = in[0] << 2 | in[1] >> 4;
@@ -25,6 +40,12 @@ void b64_decode(char *b64src, char *clrdst) {
   clrdst[0] = '\0';
   phase = 0; i=0;
   while(b64src[i]) {
+
+    progress = ((float)i/(float)strlen(b64src))*100;
+
+    if (signal(SIGINT, sigHandler) == SIG_ERR)
+        exit("signal");
+
     c = (int) b64src[i];
     if(c == '=') {
       decodeblock(in, clrdst); 
@@ -43,7 +64,6 @@ void b64_decode(char *b64src, char *clrdst) {
   }
 }
 
-/* encodeblock - encode 3 8-bit binary bytes as 4 '6-bit' characters */
 void encodeblock( unsigned char in[], char b64str[], int len ) {
     unsigned char out[5];
     out[0] = b64[ in[0] >> 2 ];
@@ -55,7 +75,6 @@ void encodeblock( unsigned char in[], char b64str[], int len ) {
     strncat(b64str, out, sizeof(out));
 }
 
-/* encode - base64 encode a stream, adding padding if needed */
 void b64_encode(char *clrstr, char *b64dst) {
   unsigned char in[3];
   int i, len = 0;
@@ -63,6 +82,19 @@ void b64_encode(char *clrstr, char *b64dst) {
 
   b64dst[0] = '\0';
   while(clrstr[j]) {
+
+    progress = ((float)j/(float)strlen(clrstr))*100;
+
+    if (signal(SIGINT, sigHandler) == SIG_ERR){
+        exit("Error in signal");
+    }
+
+    /*
+    if (sigaction(SIGIO, &sa, NULL) == -1){
+        exit("Error in signal");
+    }
+    */
+
     len = 0;
     for(i=0; i<3; i++) {
      in[i] = (unsigned char) clrstr[j];
@@ -83,6 +115,11 @@ int main(int argc, char **argv) {
         printf("Error, not enough arguments. Usage: ./base64 --encode|--decode <input-file>\n");
         return -1;
     }
+
+    /*
+    sa.sa_sigaction = sigHandler2;
+    sa.sa_flags = SA_SIGINFO;
+    */
 
     char *buffer = NULL;
     size_t size = 0;
