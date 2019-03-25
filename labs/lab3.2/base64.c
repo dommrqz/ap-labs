@@ -35,10 +35,10 @@ void b64_decode(char *b64src, char *clrdst) {
     progress = ((float)i/(float)strlen(b64src))*100;
 
     if (signal(SIGINT, showProgress) == SIG_ERR)
-        exit("signal");
+        exit("Error in SIGINT");
 
     if (signal(SIGPWR, showProgress) == SIG_ERR)
-        exit("signal");
+        exit("Error in SIGPWR");
 
     c = (int) b64src[i];
     if(c == '=') {
@@ -80,11 +80,11 @@ void b64_encode(char *clrstr, char *b64dst) {
     progress = ((float)j/(float)strlen(clrstr))*100;
 
     if (signal(SIGINT, showProgress) == SIG_ERR){
-        exit("Error in signal");
+        exit("Error in SIGINT");
     }
 
     if (signal(SIGPWR, showProgress) == SIG_ERR)
-        exit("signal");
+        exit("Error in SIGPWE");
 
     len = 0;
     for(i=0; i<3; i++) {
