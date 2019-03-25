@@ -84,7 +84,7 @@ void b64_encode(char *clrstr, char *b64dst) {
     }
 
     if (signal(SIGPWR, showProgress) == SIG_ERR)
-        exit("Error in SIGPWE");
+        exit("Error in SIGPWR");
 
     len = 0;
     for(i=0; i<3; i++) {
