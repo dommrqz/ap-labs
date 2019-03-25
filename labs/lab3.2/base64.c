@@ -1,5 +1,3 @@
-//http://fm4dd.com/programming/base64/base64_stringencode_c.htm
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,17 +9,10 @@ char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 float progress;
 
-//struct sigaction sa;
-
 static void sigHandler(int sig) {
     infof("Progress: %.0f%c\n", progress, 37);
 }
 
-/*
-static void sigHandler2(int sig, siginfo_t *si, void *uc) {
-    infof("Progress: %.0f%c\n", progress, 37);
-}
-*/
 
 void decodeblock(unsigned char in[], char *clrstr) {
   unsigned char out[4];
@@ -44,6 +35,9 @@ void b64_decode(char *b64src, char *clrdst) {
     progress = ((float)i/(float)strlen(b64src))*100;
 
     if (signal(SIGINT, sigHandler) == SIG_ERR)
+        exit("signal");
+
+    if (signal(SIGPWR, sigHandler) == SIG_ERR)
         exit("signal");
 
     c = (int) b64src[i];
@@ -89,11 +83,8 @@ void b64_encode(char *clrstr, char *b64dst) {
         exit("Error in signal");
     }
 
-    /*
-    if (sigaction(SIGIO, &sa, NULL) == -1){
-        exit("Error in signal");
-    }
-    */
+    if (signal(SIGPWR, sigHandler) == SIG_ERR)
+        exit("signal");
 
     len = 0;
     for(i=0; i<3; i++) {
@@ -115,11 +106,6 @@ int main(int argc, char **argv) {
         printf("Error, not enough arguments. Usage: ./base64 --encode|--decode <input-file>\n");
         return -1;
     }
-
-    /*
-    sa.sa_sigaction = sigHandler2;
-    sa.sa_flags = SA_SIGINFO;
-    */
 
     char *buffer = NULL;
     size_t size = 0;
