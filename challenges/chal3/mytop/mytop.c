@@ -52,7 +52,7 @@ void getTop(){
       exit("Error in SIGINT");
 
     if (c == '\n'){
-      strcpy(processes[process_count].pid, current_process);
+     strcpy(processes[process_count].pid, current_process);
      char *line = malloc(1024);
      word_count=0;
 
@@ -64,6 +64,7 @@ void getTop(){
      fgets(res, sizeof(res), curr_command_result);
      strcpy(processes[process_count].ppid, res);
      free(line);
+     pclose(curr_command_result);
 
     *line = malloc(1024);
      sprintf(line, "cat /proc/%s/status | grep Name | awk '{printf($2); next}1'\n", current_process);
@@ -78,6 +79,7 @@ void getTop(){
      fgets(res, sizeof(res), curr_command_result);
      strcpy(processes[process_count].state, res);
      free(line);
+     pclose(curr_command_result);
 
      *line = malloc(1024);
      sprintf(line, "cat /proc/%s/status | grep Threads | awk '{printf($2); next}1'\n", current_process);
@@ -85,6 +87,7 @@ void getTop(){
      fgets(res, sizeof(res), curr_command_result);
      strcpy(processes[process_count].threads, res);
      free(line);
+     pclose(curr_command_result);
 
      *line = malloc(1024);
      sprintf(line, "cat /proc/%s/status | grep -E 'Vm|Rss|Huge' | awk '{print $2}'\n", current_process);
