@@ -30,8 +30,11 @@ screen = pygame.display.set_mode((900,700))
 
 ####### BEGIN CARS DEFINITION ######
 initRed()
-initGreen()
-initBlue()
+if int(init_values[0]) == 2:
+    initGreen()
+if int(init_values[0]) == 3:
+    initGreen()
+    initBlue()
 ####### END CARS DEFINITION ########
 
 backgroundImage = pygame.image.load("res/background.png")
@@ -63,10 +66,14 @@ while running == True:
 
     screen.blit(backgroundImage, (0,0))
     screen.blit(redCarImage, (redX,redY))
-    screen.blit(greenCarImage, (greenX,greenY))
-    screen.blit(blueCarImage, (blueX,blueY))
     print "Red: ", redX, redY
-    print "Green: ", greenX, greenY
-    print "Blue: ", blueX, blueY
+    if int(init_values[0]) == 2:
+        screen.blit(greenCarImage, (greenX,greenY))
+        print "Green: ", greenX, greenY
+    if int(init_values[0]) == 3:
+        screen.blit(greenCarImage, (greenX,greenY))
+        screen.blit(blueCarImage, (blueX,blueY))
+        print "Green: ", greenX, greenY
+        print "Blue: ", blueX, blueY
     pygame.display.flip()
 frame.tick(30)
