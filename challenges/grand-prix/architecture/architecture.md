@@ -28,7 +28,7 @@ Components
 - Thread manager: the code in C that manages all threads. It includes its corresponding functions to run each thread, lock variables and write in our files.
 - Init file: the initial setup file on which the graphical interface is built. It includes the number of cars and number of laps.
 - Status file: the file that includes the current status of the car and is written by each thread. It includes: the car name, its x and y coordinates, a value that sets if it should turn around or not, and a value that sets if it is running or not.
-- Coordinates.h: the defined coordinates of the path of each car, put into three different arrays that each thread iterates depending on the car it represents.
+- Coordinates: the defined coordinates of the path of each car, and which each thread iterates depending on the car it represents.
 - Raspberry PI: the first hardware part. A microcontroller that is the mean of connection between the code logic and the LCD screen.
 - LCD screen: the other hardware part. An LCD screen that dosplays the results of the race.
 
@@ -61,4 +61,6 @@ Conclusions
 ------------------
 Working with threads has been quite a nice challenge. As we progressed in the course, we could see that these kind of abstractions were periodically easier to make in our heads. Trying to find out the critical part, synchronization, variable locks and still giving it a well-made design and architecture are practices that make a good programmer. 
 
-For this project, we successfully designed a solution for the grand prix simulation, in which the basic class material was undoubtedly used, such as the basic C handling and, as we said before, the appropriate abstraction level. This also gives us a close look on how important and necessary threads are. 
+For this project, we successfully designed a solution for the grand prix simulation, in which the basic class material was undoubtedly used, such as the basic C handling and, as we said before, the appropriate abstraction level. This also gives us a close look on how important and necessary threads are, many times, we want different stages of a program to run on an independent line, this is how many things in daily life work.
+
+Many things that we worked out were quite a challenge: making a right abstraction, learning about pygame (and more Python in general), thread management and locks, and someimportant soft skills that include teamwork, organization and division of work. We are confident that our implementation is a good one, but are sure that there must be many things to make better.
