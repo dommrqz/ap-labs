@@ -80,10 +80,12 @@ static void * blueThread(void *arg){
     int i;
     int j;
     printf("%s\n", s);
+    char rotation[] = " -1";
+    int should_rotate = 1;
 
     while(1){
-        for(i = 0; i < numLaps; ++i){
-            for (j = 0; j < 232; ++j){
+        for(int i = 0; i < 1; ++i){
+            for (int j = 0; j < 470; ++j){
                 usleep(100000);
                 // TODO: Check if corresponding file exists; If (file exist) -> Wait ... else write coordinates
                 printf("X: %d\tY: %d\n", inner[j][i], inner[j][i+1]);
@@ -94,13 +96,16 @@ static void * blueThread(void *arg){
                     continue;
                 }
                 fprintf(file, "%s", "Blue ");
-                fprintf(file, "%d", inner[j][0]);
+                fprintf(file, "%d", inner[j][i]);
                 fprintf(file, "%s", " ");
-                fprintf(file, "%d", inner[j][1]);
-                fprintf(file, "%s", " 0");
+                fprintf(file, "%d", inner[j][i+1]);
+                fprintf(file, "%s", rotation);
                 fclose(file);
+
             }
         }
+        usleep(100000);
+
         break;
     }
 

@@ -66,14 +66,12 @@ while running == True:
                 print("El Azul")
                 carX = int(contents[1], 10)
                 carY = int(contents[2], 10)
+                rotation = int(contents[3], 10)
+                blueCarImage = pygame.transform.rotate(blueCarImage, rotation)
                 screen.blit(backgroundImage, (0,0))
                 screen.blit(blueCarImage, (carX,carY))
                 print(carX, carY)
-                print contents[3]
-                rotation = int(contents[3], 10)
-                ## TODO: Perform Rotation
-                # blueCarImage = pygame.transform.rotate(blueCarImage,rotation)
-                # Delete the FILE
+                print rotation
                 os.remove("status.txt")
                 continue
 
