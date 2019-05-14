@@ -28,7 +28,11 @@ General Requirements
 Deliverables
 ------------
 - Source code in each team's member repository (`ap-labs/challenges/grand-prix`).
+<<<<<<< HEAD
 - Architecture Document - [ARCHITECTURE.md](architecture.md)
+=======
+- Architecture Document - [ARCHITECTURE.md](architecture/ARCHITECTURE.md)
+>>>>>>> 46993a46fb9a7448fd942be7595d0f6b08afe5d0
 - Build/Run automation (`Makefile` and documentation - [GRAND_PRIX.md](compilation_instructions.md))
 - Project's presentation (5-10 minutes)
 
