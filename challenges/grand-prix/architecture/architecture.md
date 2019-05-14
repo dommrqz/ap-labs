@@ -54,7 +54,7 @@ This part shows the interaction between components in four UML diagrams. These d
 - Process view: it concerns the general interaction of parts of a system, and will use the component diagram to represent it.
 ![component](component.png)
 
-- Physical view: it concerns the hardware parts of our system, and will use a deplyment diagram to represent it.
+- Physical view: it concerns the hardware parts of our system, and will use a deployment diagram to represent it.
 ![deploy](deploy.png)
 
 Conclusions
