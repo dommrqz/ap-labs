@@ -13,7 +13,9 @@ There is only one winner, it will be displayed in physical LCD.
 
 To compile and execute, run the following commands in the same order: 
 
-    ./build
+    sudo chmod 777 build.sh
+    
+    ./build.sh
 
     make
 
