@@ -540,13 +540,15 @@ int main() {
 
     srand(time(0));
     blueSpeed = (rand() % (UPPERLIMIT - LOWERLIMIT + 1)) + LOWERLIMIT;
-    greenSpeed = (rand() % (UPPERLIMIT - LOWERLIMIT + 1)) + LOWERLIMIT;
-    redSpeed = (rand() % (UPPERLIMIT - LOWERLIMIT + 1)) + LOWERLIMIT;
-
-    printf("%d %d %d\n", blueSpeed, greenSpeed, redSpeed);
+    pthread_t blueCarThread;
+    if (numRacers == 2 || numRacers == 3){
+        greenSpeed = (rand() % (UPPERLIMIT - LOWERLIMIT + 1)) + LOWERLIMIT;
+    }
+    if (numRacers == 3){
+        redSpeed = (rand() % (UPPERLIMIT - LOWERLIMIT + 1)) + LOWERLIMIT;
+    }
 
     pthread_t serverThread;
-    pthread_t blueCarThread;
     pthread_t redCarThread;
     pthread_t greenCarThread;
     void *res;
@@ -565,14 +567,18 @@ int main() {
         printf("Error while creating thread\n");
     }
 
-    s = pthread_create(&redCarThread, NULL, redThread, "Running Red Car Thread");
-    if (s != 0){
-        printf("Error while creating thread\n");
+    if(numRacers == 3){
+        s = pthread_create(&redCarThread, NULL, redThread, "Running Red Car Thread");
+        if (s != 0){
+            printf("Error while creating thread\n");
+        }
     }
 
-    s = pthread_create(&greenCarThread, NULL, greenThread, "Running Green Car Thread");
-    if (s != 0){
-        printf("Error while creating thread\n");
+    if(numRacers == 2 || numRacers == 3){
+        s = pthread_create(&greenCarThread, NULL, greenThread, "Running Green Car Thread");
+        if (s != 0){
+            printf("Error while creating thread\n");
+        }
     }
     /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -581,14 +587,18 @@ int main() {
         printf("Error while joining thread\n");
     }
 
-    s = pthread_join(redCarThread, &res);
-    if (s != 0){
-        printf("Error while joining thread\n");
-    }
+    if(numRacers == 3){
+        s = pthread_join(redCarThread, &res);
+        if (s != 0){
+            printf("Error while joining thread\n");
+        }
+    }   
 
-    s = pthread_join(greenCarThread, &res);
-    if (s != 0){
-        printf("Error while joining thread\n");
+    if(numRacers == 2 || numRacers == 3){
+        s = pthread_join(greenCarThread, &res);
+        if (s != 0){
+            printf("Error while joining thread\n");
+        }
     }
 
     s = pthread_join(serverThread, &res);

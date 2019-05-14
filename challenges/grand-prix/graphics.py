@@ -31,10 +31,9 @@ screen = pygame.display.set_mode((900,700))
 
 ####### BEGIN CARS DEFINITION ######
 initBlue()
-if int(init_values[0]) == 2:
+if int(init_values[0]) == 2 or int(init_values[0]) == 3:
     initGreen()
 if int(init_values[0]) == 3:
-    initGreen()
     initRed()
 ####### END CARS DEFINITION ########
 
@@ -72,7 +71,7 @@ while running == True:
                 blueRotation = int(contents[3], 10)
                 os.remove("blue.txt")
 
-    if os.path.exists("red.txt"):
+    if os.path.exists("red.txt") and int(init_values[0]) == 3:
         f = open("red.txt", "r")
         if f.mode == "r":
             contents = f.read().split()  ## FILE FORMAT: Car X Y Rotation
@@ -83,7 +82,7 @@ while running == True:
                 redRotation = int(contents[3], 10)
                 os.remove("red.txt")
 
-    if os.path.exists("green.txt"):
+    if os.path.exists("green.txt") and (int(init_values[0]) == 2 or int(init_values[0]) == 3):
         f = open("green.txt", "r")
         if f.mode == "r":
             contents = f.read().split()  ## FILE FORMAT: Car X Y Rotation
@@ -94,18 +93,23 @@ while running == True:
                 greenRotation = int(contents[3], 10)
                 os.remove("green.txt")
 
-    blueCarImage = pygame.transform.rotate(blueCarImage, blueRotation)
-    redCarImage = pygame.transform.rotate(redCarImage, redRotation)
-    greenCarImage = pygame.transform.rotate(greenCarImage, greenRotation)
     screen.blit(backgroundImage, (0,0))
-    print(redX, redY)
-    print redRotation
+    blueCarImage = pygame.transform.rotate(blueCarImage, blueRotation)
     print(blueX, blueY)
     print blueRotation
-    print(greenX, greenY)
-    print greenRotation
     screen.blit(blueCarImage, (blueX, blueY))
-    screen.blit(redCarImage, (redX, redY))
-    screen.blit(greenCarImage, (greenX, greenY))
+    
+    if int(init_values[0]) == 3:
+        redCarImage = pygame.transform.rotate(redCarImage, redRotation)
+        print(redX, redY)
+        print redRotation
+        screen.blit(redCarImage, (redX, redY))
+    
+    if int(init_values[0]) == 2 or int(init_values[0]) == 3:
+        greenCarImage = pygame.transform.rotate(greenCarImage, greenRotation)
+        print(greenX, greenY)
+        print greenRotation
+        screen.blit(greenCarImage, (greenX, greenY))
+
     pygame.display.flip()
     frame.tick(30)
