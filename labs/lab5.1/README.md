@@ -1,31 +1,14 @@
-Lab 5.1 - OpenMP Labs
-=====================
+# Lab 5.1
+## Jorge Dominic Márquez Muñoz, A00569034
 
-This is a single lab for multiple OpenMP exercises that we'll be doing in class. Below you can see the list of exercises that
-will considered for the lab's grading. The goal of each exercise is to convert its default serial implementation to
-a parallel implementation with OpenMP.
+### OpenMP.
+### Compilation instructions:
 
-| Exercise Name          | Serial Implementation | Parallel Implementation                            |
-|------------------------|-----------------------|----------------------------------------------------|
-| Hello World            | `hello.c`             | `hello_par.c`                                      |
-| Integral PI Compute    | `pi.c`                | `pi_spmd_simple.c`, `pi_spmd_final.c`, `pi_loop.c` |
-| Monte Carlo PI Compute | `pi_mc.c`             | `pi_mc_par.c`                                      |
-| Matrix Multiplication  | `matmul.c`            | `matmul_par.c`                                     |
-| Producer/Consumer      | `prod_cons.c`         | `prod_cons_par.c`                                  |
-
-
-
-Final Requirements and Considerations
----------------------------------------
-- Use the logger that was done on [lab2.4](https://github.com/CodersSquad/ap-labs/tree/master/labs/lab2.4).
-- Use the `*.c` files for implementing your code.
-- Use the `Makefile` for compilation.
-- Update `README.md` with the proper steps for building and running your code.
-- Don't forget to handle errors properly.
-- Coding best practices implementation will be also considered.
-
-
-Submission Details
-==================
-
-Read [Classify API](../../classify.md)
+#### This lab includes a Makefile, so can be compiled and cleaned by
+	1. make
+	2. make clean
+### Testing code:
+#### (only manual testing is provided, since it will be easier to visualize the result).
+    1. ./[the name of the program]
+#### Notes:
+    1. Only hello, hello_par, pi, pi_spmd_simple and pi_spmd_final are subject for this lab.
