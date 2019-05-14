@@ -61,31 +61,31 @@ long *getColumn(int col, long *matrix)
 		errorf("col must be 0>col>2000\n");
 		exit(EXIT_FAILURE);
 	}
-	size_t offset = col - 1;
-	long *mycol;
-	mycol = (long *)malloc(2000 * sizeof(long));
+	size_t shift = col - 1;
+	long *currCol;
+	currCol = (long *)malloc(2000 * sizeof(long));
 
 	for (int i = 0; i < 2000; i++) {
-		mycol[i] = matrix[offset];
-		offset += 2000;
+		currCol[i] = matrix[shift];
+		shift += 2000;
 	}
-	return mycol;
+	return currCol;
 }
 
 long *getRow(int row, long *matrix)
 {
 	if (row < 0 || row > 2000) {
-		errorf("row must bm 0>row>2000\n");
+		errorf("Try with more rows");
 		exit(EXIT_FAILURE);
 	}
-	size_t offset = ((2 * row) - 2) * 1000;
-	long *myrow;
-	myrow = (long *)malloc(2000 * sizeof(long));
+	size_t shift = ((2 * row) - 2) * 1000;
+	long *currRow;
+	currRow = (long *)malloc(2000 * sizeof(long));
 
 	for (int i = 0; i < 2000; i++) {
-		myrow[i] = matrix[offset++];
+		currRow[i] = matrix[shift++];
 	}
-	return myrow;
+	return currRow;
 }
 
 int getLock(void)
@@ -134,7 +134,6 @@ long *multiply(long *matA, long *matB)
 
 		for (size_t j = 0; j < 2000; j++)
 			pthread_join(threads[j], NULL);
-		printf("\r%ld%%", (i * 100) / 1999);
 		fflush(stdout);
 	}
 	printf("\n");
