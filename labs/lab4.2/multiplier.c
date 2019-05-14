@@ -1,6 +1,3 @@
-// Taken as a reference from César García's implementation,
-// from: https://github.com/cesarau04/ap-labs/tree/master/labs/lab4.2
-
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
