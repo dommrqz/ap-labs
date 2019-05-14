@@ -83,7 +83,7 @@ static void * blueThread(void *arg){
 
     while(1){
         for(i = 0; i < numLaps; ++i){
-            for (j = 0; j < 211; ++j){
+            for (j = 0; j < 232; ++j){
                 usleep(100000);
                 // TODO: Check if corresponding file exists; If (file exist) -> Wait ... else write coordinates
                 printf("X: %d\tY: %d\n", inner[j][i], inner[j][i+1]);
@@ -99,7 +99,6 @@ static void * blueThread(void *arg){
                 fprintf(file, "%d", inner[j][1]);
                 fprintf(file, "%s", " 0");
                 fclose(file);
-
             }
         }
         break;
