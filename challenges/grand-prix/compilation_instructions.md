@@ -1,6 +1,6 @@
 # Grand-prix - execution document
 ------------------------
-##Description
+## Description
 
 This project consists on a simulation of a Grand-Prix Race. 
 The user will be able to specify the number of threads, in this case, the number of racing cars. 
