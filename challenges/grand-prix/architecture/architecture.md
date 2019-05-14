@@ -44,9 +44,10 @@ Technologies
 Architecture
 -------------------------------
 This part shows the interaction between components in four UML diagrams. These diagrams show a different view. Below, there will be a short description of each view, the diagram that was made, and the diagram itself:
-![state](state.png)
 
 - Logical view: it concerns the different logical phases a program can have, and will use a state diagram to represent it.
+![state](state.png)
+
 - Development view: it concerns the different activities that take place in the system, and will use an activity diagram to represent it.
 ![activity](activity.png)
 
